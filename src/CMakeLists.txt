@@ -1,22 +1,33 @@
 
-
-AUX_SOURCE_DIRECTORY(../include/log INCLUDE_FILE)
-AUX_SOURCE_DIRECTORY(../include/timer INCLUDE_FILE)
-message("include file src:${INCLUDE_FILE}")
-
+#包含的头文件
 INCLUDE_DIRECTORIES(../include)
+
+# 需要编译的源文件目录
+AUX_SOURCE_DIRECTORY(./log SRC_LIST)
+AUX_SOURCE_DIRECTORY(./timer SRC_LIST)
+AUX_SOURCE_DIRECTORY(./auto SRC_LIST)
+message("SRC_LIST src:${SRC_LIST}")
+
+
+# 添加静态库  
+ADD_LIBRARY(escpplib STATIC ${SRC_LIST})  
+
+# 安装头文件路径
+INSTALL(DIRECTORY ../include/ 
+    DESTINATION /usr/local/include/escpplib PATTERN 
+    "*.h")  
+
+#AUX_SOURCE_DIRECTORY(../include/log INCLUDE_FILE)
+#AUX_SOURCE_DIRECTORY(../include/timer INCLUDE_FILE)
+#message("include file src:${INCLUDE_FILE}")
+
 
 #AUX_SOURCE_DIRECTORY(${${PROJECT_NAME}_SOURCE_DIR}/src/timer SRC_LIST)
 #AUX_SOURCE_DIRECTORY(${${PROJECT_NAME}_SOURCE_DIR}/src/log SRC_LIST)
-AUX_SOURCE_DIRECTORY(./log SRC_LIST)
-AUX_SOURCE_DIRECTORY(./timer SRC_LIST)
 
-message("SRC_LIST src:${SRC_LIST}")
 
 ##添加动态库  
 #ADD_LIBRARY(escpplib SHARED ${SRC_LIST})  
-##添加静态库  
-ADD_LIBRARY(escpplib STATIC ${SRC_LIST})  
 #  
 ##生成动态库的版本号  
 #SET_TARGET_PROPERTIES(hello PROPERTIES VERSION 1.2 SOVERSION 1)  
@@ -31,6 +42,3 @@ ADD_LIBRARY(escpplib STATIC ${SRC_LIST})
 #INSTALL(FILES hello.h DESTINATION include/hello)  
 
 
-INSTALL(DIRECTORY ../include/ 
-    DESTINATION /usr/local/include/escpplib PATTERN 
-    "*.h")  

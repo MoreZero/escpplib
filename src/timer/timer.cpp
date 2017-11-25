@@ -1,5 +1,5 @@
 #include "timer/timer.h"
-#include "log/log.h"
+#include "log.h"
 
 namespace escpplib{
 

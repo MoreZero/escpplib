@@ -1,4 +1,4 @@
-#include "log/log.h"
+#include "log.h"
 #include "timer/timer.h"
 #include <string> 
 //using namespace escpplib;
