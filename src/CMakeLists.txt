@@ -6,8 +6,12 @@ INCLUDE_DIRECTORIES(../include)
 AUX_SOURCE_DIRECTORY(./log SRC_LIST)
 AUX_SOURCE_DIRECTORY(./timer SRC_LIST)
 AUX_SOURCE_DIRECTORY(./auto SRC_LIST)
+AUX_SOURCE_DIRECTORY(./config SRC_LIST)
 message("SRC_LIST src:${SRC_LIST}")
 
+#设置编译参数
+SET(CMAKE_CXX_FLAGS "-std=c++0x -g -Wall ")
+message("==> CXX flags: ${CMAKE_CXX_FLAGS}")
 
 # 添加静态库  
 ADD_LIBRARY(escpplib STATIC ${SRC_LIST})  
