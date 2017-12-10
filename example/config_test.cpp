@@ -5,8 +5,7 @@
 //using namespace escpplib;
 
 int main(){
-    std::string msg="dd";
-    escpplib::CCostTimer timer(&msg); 
+    escpplib::CCostTimer timer("config test"); 
     LOG_INFO("config test");
 
     escpplib::CConfig  config;

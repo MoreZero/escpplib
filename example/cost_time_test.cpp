@@ -4,9 +4,9 @@
 //using namespace escpplib;
 
 int main(){
-    std::string msg="dd";
-    escpplib::CCostTimer timer(&msg); 
     LOG_INFO("time cost test");
+    escpplib::CCostTimer timer1("test1"); 
+    escpplib::CCostTimer timer2(""); 
 
     return 0;
 }
