@@ -129,9 +129,6 @@ int CSocket::Close() {
     return 0;
 }
 
-
-
-
 int CSocket::RecvStr(std::string &str) {
     char buff[8*1024];
     ssize_t ret = Recv(buff, 8*1024, 0);
@@ -157,10 +154,6 @@ int  CSocket::SetBlocking() {
     fcntl(fd_, F_SETFL, old_option & (~O_NONBLOCK));
     return old_option; 
 }
-
-
-
-
 
 
 

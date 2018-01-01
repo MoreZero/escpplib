@@ -36,6 +36,13 @@ extern void SetLogStdErrFd(FILE* fd);
 		fprintf(escpplib::g_escpplib_log_stderr,"[DEBUG][%s][%s:%d#%s]" format "\n", formattime, __FILE__, __LINE__, __FUNCTION__, ##args);\
 	}while(0)
 
+#define LOG_DEBUG_MSG(format, args...) \
+	do{\
+		char formattime[18];\
+		escpplib::getLogTime(formattime);\
+		fprintf(escpplib::g_escpplib_log_stderr,"[DEBUG][%s][%s:%d#%s][errmsg:%s]" format "\n", formattime, __FILE__, __LINE__, __FUNCTION__, strerror(errno), ##args);\
+	}while(0)
+
 
 #define LOG_WORNING(format, args...) \
 	do{\
