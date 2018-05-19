@@ -2,3 +2,8 @@
 Makefile
 CMakeFiles/
 CMakeCache.txt
+*_test
+*.log
+*.a
+tags
+install_manifest.txt

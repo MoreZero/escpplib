@@ -8,5 +8,7 @@ all:
 	g++ -g -std=c++11 -Wall -I ../include  event_test.cpp ../src/libescpplib.a  -o event_test  -lpthread
 	g++ -g -std=c++11 -Wall -I ../include  speed_test.cpp ../src/libescpplib.a  -o speed_test 
 	g++ -g -std=c++11 -Wall -I ../include  simple_server_test.cpp ../src/libescpplib.a  -o simple_server_test 
+	g++ -g -std=c++11 -Wall -I ../include  mqtt.cpp ../src/libescpplib.a  -o mqtt_test 
+	g++ -g -std=c++11 -Wall -I ../include  udp_socket_test.cpp ../src/libescpplib.a  -o udp_socket_test 
 
 
