@@ -59,6 +59,23 @@ ssize_t CUdpSocket::RecvFrom(void* buf)
     return cnt;
 }
 
+
+ssize_t CUdpSocket::SendTo(const void* buf, size_t len, const char* ip, int port)
+{
+    if (status_ == CLOSED) {
+        if (0 != Init()) {
+            return -1;
+        }
+    }
+
+    struct sockaddr_in addr;
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    inet_pton(AF_INET, ip, &addr.sin_addr);
+
+    return sendto(fd_, buf, len, 0, (const struct sockaddr*)&addr, sizeof(addr));
+}
+
 int CUdpSocket::Init()
 {
     if (status_ != CLOSED) return -1;

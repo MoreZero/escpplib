@@ -27,6 +27,7 @@ public:
    
     // 系统调用相关封装
     ssize_t RecvFrom(void* buf);
+    ssize_t SendTo(const void* buf, size_t len, const char* ip, int port);
     int     Init();
     int     Bind(const char* ip, int port);
     
