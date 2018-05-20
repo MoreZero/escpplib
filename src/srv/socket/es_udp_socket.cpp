@@ -46,20 +46,14 @@ ssize_t CUdpSocket::RecvFrom(void* buf)
     }
     
     //buf = recv_buff_;
-    socklen_t len = 0;
+    socklen_t len = sizeof(struct sockaddr_in);
     struct sockaddr_in addr;
     bzero(&addr, sizeof(addr));
-    ssize_t cnt = recvfrom(fd_, buf, 65534, 0, (struct sockaddr*)&addr, &len);
+    ssize_t cnt = recvfrom(fd_, buf, 65534, 0, (struct sockaddr *)&addr, &len);
     if (cnt == -1) return -1;
 
     char ip[INET_ADDRSTRLEN+1];
-    const char * result = inet_ntop(AF_INET, &addr.sin_addr, ip, INET_ADDRSTRLEN);
-    if (result == NULL)
-    {
-        LOG_ERROR_MSG("inet_ntop");
-    }
-    ip[INET_ADDRSTRLEN] = 0;
-    LOG_DEBUG("recv from ip:%s, port:%d", ip, ntohs(addr.sin_port));
+    inet_ntop(AF_INET, &addr.sin_addr, ip, INET_ADDRSTRLEN);
     ip_ = ip;
     port_ = ntohs(addr.sin_port);
     return cnt;

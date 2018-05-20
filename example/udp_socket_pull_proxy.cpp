@@ -27,18 +27,18 @@ int main(int argc, char** argv){
         LOG_FATAL_MSG("udp_socket.Bind");
     }
 
+    udp_socket.SendTo("start connet", 12, srv_ip.c_str(), srv_port);
     while(1) {
         char  buff[65535];
-        udp_socket.SendTo("xxx", 3, srv_ip.c_str(), srv_port);
         ssize_t cnt = udp_socket.RecvFrom(buff);
         if (cnt == -1) {
             LOG_ERROR_MSG("udp_socket.RecvFrom");
             continue;
         }
         buff[cnt] = 0;
-        LOG_INFO("recv from ip:%s, port:%d cnt:%ld recv msg:%s",
-                udp_socket.GetIp().c_str(), udp_socket.GetPort(), cnt, buff);
-        sleep(10);
+        LOG_INFO("recv from ip:%s, port:%d cnt:%ld",
+                udp_socket.GetIp().c_str(), udp_socket.GetPort(), cnt);
+        udp_socket.SendTo(buff, cnt, dest_ip.c_str(), dest_port);
     }
 
     return 0;
