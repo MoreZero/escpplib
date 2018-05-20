@@ -53,7 +53,13 @@ ssize_t CUdpSocket::RecvFrom(void* buf)
     if (cnt == -1) return -1;
 
     char ip[INET_ADDRSTRLEN+1];
-    inet_ntop(AF_INET, &addr.sin_addr.s_addr, ip, INET_ADDRSTRLEN);
+    const char * result = inet_ntop(AF_INET, &addr.sin_addr, ip, INET_ADDRSTRLEN);
+    if (result == NULL)
+    {
+        LOG_ERROR_MSG("inet_ntop");
+    }
+    ip[INET_ADDRSTRLEN] = 0;
+    LOG_DEBUG("recv from ip:%s, port:%d", ip, ntohs(addr.sin_port));
     ip_ = ip;
     port_ = ntohs(addr.sin_port);
     return cnt;

@@ -7,27 +7,29 @@ using namespace std;
 
 int main(int argc, char** argv){
     
-    if (argc < 5) {
-        LOG_FATAL_MSG("please input src_ip,src_prot,dest_ip,dest_port");
+    if (argc < 7) {
+        LOG_FATAL_MSG("please input srv_ip,srv_prot,local_ip,local_port,dest_ip,dest_port");
     }
-    string src_ip = argv[1];
-    int src_port = atoi(argv[2]);
-    string dest_ip = argv[3];
-    int dest_port = atoi(argv[4]);
-    LOG_INFO("src_ip:%s\nsrc_prot:%d\n,dest_ip:%s\n,dest_port:%d",
-            src_ip.c_str(), src_port, dest_ip.c_str(), dest_port);
+    string srv_ip = argv[1];
+    int srv_port = atoi(argv[2]);
+    string local_ip = argv[3];
+    int local_port = atoi(argv[4]);
+    string dest_ip = argv[5];
+    int dest_port = atoi(argv[6]);
+    LOG_INFO("srv_ip:%s\nsrv_prot:%d\n,local_ip:%s\nlocal_prot:%d\n,dest_ip:%s\n,dest_port:%d",
+            srv_ip.c_str(), srv_port, local_ip.c_str(), local_port, dest_ip.c_str(), dest_port);
 
     escpplib::CCostTimer timer(); 
     LOG_INFO("socket test");
 
     escpplib::CUdpSocket udp_socket;
-    //if (0 != udp_socket.Bind("119.29.155.157", 8000)) {
-    if (0 != udp_socket.Bind(src_ip.c_str(), src_port)) {
+    if (0 != udp_socket.Bind(local_ip.c_str(), local_port)) {
         LOG_FATAL_MSG("udp_socket.Bind");
     }
 
     while(1) {
         char  buff[65535];
+        udp_socket.SendTo("xxx", 3, srv_ip.c_str(), srv_port);
         ssize_t cnt = udp_socket.RecvFrom(buff);
         if (cnt == -1) {
             LOG_ERROR_MSG("udp_socket.RecvFrom");
@@ -36,7 +38,7 @@ int main(int argc, char** argv){
         buff[cnt] = 0;
         LOG_INFO("recv from ip:%s, port:%d cnt:%ld recv msg:%s",
                 udp_socket.GetIp().c_str(), udp_socket.GetPort(), cnt, buff);
-        udp_socket.SendTo(buff, cnt, dest_ip.c_str(), dest_port);
+        sleep(10);
     }
 
     return 0;
