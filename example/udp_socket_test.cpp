@@ -10,17 +10,18 @@ int main(){
 
     escpplib::CUdpSocket udp_socket;
     //if (0 != udp_socket.Bind("119.29.155.157", 8000)) {
-    if (0 != udp_socket.Bind("127.0.0.1", 8000)) {
+    if (0 != udp_socket.Bind("0.0.0.0", 8000)) {
         LOG_FATAL_MSG("udp_socket.Bind");
     }
 
     while(1) {
-        char * buff;
+        char  buff[65535];
         ssize_t cnt = udp_socket.RecvFrom(buff);
         if (cnt == -1) {
             LOG_ERROR_MSG("udp_socket.RecvFrom");
             continue;
         }
+        LOG_INFO("recv cnt:%d", cnt);
         buff[cnt] = 0;
         LOG_INFO("recv msg:%s", buff);
     }

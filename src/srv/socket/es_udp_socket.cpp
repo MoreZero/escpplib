@@ -45,11 +45,11 @@ ssize_t CUdpSocket::RecvFrom(void* buf)
         return -1;
     }
     
-    buf = recv_buff_;
+    //buf = recv_buff_;
     socklen_t len = 0;
     struct sockaddr_in addr;
     bzero(&addr, sizeof(addr));
-    ssize_t cnt = recvfrom(fd_, recv_buff_, 65534, 0, (struct sockaddr*)&addr, &len);
+    ssize_t cnt = recvfrom(fd_, buf, 65534, 0, (struct sockaddr*)&addr, &len);
     if (cnt == -1) return -1;
 
     char ip[INET_ADDRSTRLEN+1];
