@@ -67,6 +67,8 @@ int main(int argc, char** argv){
                         udp_input_socket.GetIp().c_str(), udp_input_socket.GetPort(), cnt);
                 if (client_port != 0)
                 {
+                    LOG_INFO("sendto ip:%s, port:%d cnt:%ld",
+                        client_ip.c_str(), client_port, cnt);
                     udp_output_socket.SendTo(buff, cnt, client_ip.c_str(), client_port);
                 }
 
