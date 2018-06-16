@@ -13,5 +13,6 @@ all:
 	g++ -g -std=c++11 -Wall -I ../include  udp_socket_pull_proxy_fifo.cpp ../src/libescpplib.a  -o udp_socket_pull_proxy_fifo
 	g++ -g -std=c++11 -Wall -I ../include  udp_socket_hub.cpp ../src/libescpplib.a  -o udp_socket_hub 
 	g++ -g -std=c++11 -Wall -I ../include  udp_socket_sender.cpp ../src/libescpplib.a  -o udp_socket_sender 
+	g++ -g -std=c++11 -Wall -I ../include  proto_buff_test.cpp ../src/libescpplib.a  -o proto_buff_test 
 
 

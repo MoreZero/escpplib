@@ -52,6 +52,7 @@ int CSocket::Bind(const char* ip, int port) {
 int CSocket::Listen(int backlog) {
     if (status_ != BIND) return -1;
 
+    LOG_DEBUG("Listen ip:%s, port:%d", ip_.c_str(), port_);
     int ret = listen(fd_, backlog);
     if (ret == -1) return -1;
 

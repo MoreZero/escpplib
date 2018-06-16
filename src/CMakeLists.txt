@@ -10,6 +10,7 @@ AUX_SOURCE_DIRECTORY(./config SRC_LIST)
 AUX_SOURCE_DIRECTORY(./srv/socket SRC_LIST)
 AUX_SOURCE_DIRECTORY(./srv/event SRC_LIST)
 AUX_SOURCE_DIRECTORY(./srv/simple_server SRC_LIST)
+AUX_SOURCE_DIRECTORY(./srv/proto SRC_LIST)
 message("SRC_LIST src:${SRC_LIST}")
 
 #设置编译参数
