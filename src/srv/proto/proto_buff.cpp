@@ -21,6 +21,7 @@ int32_t ProtoBuff::Write(const int8_t* buf, int32_t size) {
     memcpy(buff_+buff_size_, buf, size);
     buff_size_ += size;
 
+    // TODO memmove可以放循环外进行优化
     do {
         int32_t cmd=0, head_size=0, body_size=0;
         int32_t ret = proto_head_parse_func_(buff_, buff_size_, cmd, head_size, body_size);
