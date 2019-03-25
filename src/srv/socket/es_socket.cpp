@@ -3,11 +3,10 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <linux/netfilter_ipv4.h>
 
 #include "log.h"
 #include "es_socket.h"
-
-
 namespace escpplib{
 
 
@@ -156,7 +155,24 @@ int  CSocket::SetBlocking() {
     return old_option; 
 }
 
-
+int CSocket::GetDestAddr(std::string& ip, int32_t& port) {
+    socklen_t len = sizeof(sockaddr_in);
+    struct sockaddr_in dst_addr;
+    bzero(&dst_addr, sizeof(dst_addr));
+    int32_t ret = getsockopt(fd_, SOL_IP, SO_ORIGINAL_DST, &dst_addr, &len);
+    if (ret != 0) {
+        return -1;
+    }
+    port = ntohs(dst_addr.sin_port);
+    char temp_ip[16];
+    const char* p_ret = inet_ntop(AF_INET, &dst_addr.sin_addr, temp_ip, 16);    
+    if (p_ret == NULL)
+    {
+        return -2;
+    }
+    ip = temp_ip;
+    return 0;
+}
 
 
 

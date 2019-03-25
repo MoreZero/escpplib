@@ -49,6 +49,7 @@ public:
     const std::string& GetIp() { return ip_;}
     int GetPort() { return port_;}
 
+    int GetDestAddr(std::string& ip, int32_t& port);
     
    
 private:

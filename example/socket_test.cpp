@@ -29,6 +29,13 @@ int main(){
         }
          
         LOG_INFO("get connect addr:%s:%d", server_socket.GetIp().c_str(), server_socket.GetPort() );
+        std::string dst_ip = "";
+        int32_t port = 0;
+        ret = server_socket.GetDestAddr(dst_ip, port);
+        LOG_INFO("dst_ip:%s, port:%d", dst_ip.c_str(), port);
+        if (ret != 0){
+            LOG_FATAL_MSG("GetDestAddr Failed, ret:%d", ret);
+        }
        
         std::string ack_msg;
         std::string recv_msg;
