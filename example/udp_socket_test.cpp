@@ -36,7 +36,7 @@ int main(int argc, char** argv){
         buff[cnt] = 0;
         LOG_INFO("recv from ip:%s, port:%d cnt:%ld recv msg:%s",
                 udp_socket.GetIp().c_str(), udp_socket.GetPort(), cnt, buff);
-        udp_socket.SendTo(buff, cnt, dest_ip.c_str(), dest_port);
+        udp_socket.SendTo(buff, cnt, udp_socket.GetIp().c_str(), udp_socket.GetPort());
     }
 
     return 0;

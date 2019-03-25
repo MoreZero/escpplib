@@ -103,6 +103,7 @@ class CDefaultClient {
 public:
     CDefaultClient(std::shared_ptr<CSocket> p_socket):p_socket_(p_socket) {
         LOG_DEBUG("CDefaultClient");
+        LOG_DEBUG("new connect from:%s", p_socket_->GetIp().c_str());
     }
     ~CDefaultClient() {
         LOG_DEBUG("~CDefaultClient");
